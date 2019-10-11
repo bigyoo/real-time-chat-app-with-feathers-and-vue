@@ -51,4 +51,42 @@ For more information on all the things you can do with Feathers visit [docs.feat
     ```
     feather g app
     ```
-* [ ] Bla bla bla  
+* [ ] Review the generated folders
+* [ ] Start MongoDB
+    ```
+    docker run -p 27017:27017 --name my-mongo -d mongo
+    ```
+* [ ] Start the application
+    ```
+    npm start
+    ```
+* [ ] Try out the REST api from Postman (get users, create user, authentication
+* [ ] Create a service for the messages 
+    ```
+    feather g service
+    ```
+* [ ] Demonstrate how to create messages
+* [ ] Set 'author' on new messages automatically 
+    ```
+    context.data.author = context.params.user.email; 
+    ```
+* [ ] Create client
+    ```
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+    <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
+    <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
+    ```
+
+    ```
+    // Socket.io is exposed as the `io` global.
+    var socket = io('http://localhost:3030');
+    // @feathersjs/client is exposed as the `feathers` global.
+    var app = feathers();
+
+    app.configure(feathers.socketio(socket));
+    app.configure(feathers.authentication());
+
+    app.service('messages').create({
+        text: 'A new message'
+    });
+    ```
